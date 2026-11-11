@@ -9,6 +9,12 @@ workflows:
         script: flutter pub get
       - name: Build unsigned iOS
         script: flutter build ios --release --no-codesign
+      - name: Add Arabic app name
+        script: |
+          APP_PATH="build/ios/iphoneos/Runner.app"
+          mkdir -p "$APP_PATH/ar.lproj"
+          cp ios/Runner/ar.lproj/InfoPlist.strings "$APP_PATH/ar.lproj/InfoPlist.strings"
+          plutil -convert binary1 "$APP_PATH/ar.lproj/InfoPlist.strings" || true
       - name: Create IPA manually
         script: |
           mkdir -p build/ios/iphoneos/Payload
