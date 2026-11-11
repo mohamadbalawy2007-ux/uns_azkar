@@ -1,0 +1,47 @@
+
+name: azkar_muslim
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  hijri: ^3.0.0
+  shared_preferences: ^2.5.6
+
+  # Local Notifications
+  flutter_local_notifications: ^19.5.0
+  flutter_timezone: ^5.1.1
+  timezone: ^0.10.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+
+# App Icon Configuration
+flutter_launcher_icons:
+  image_path: "assets/Images/icon app.png"
+  android: true
+  ios: true
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/Images/
+    - assets/Images/athkar_alsabah/
+    - assets/Images/athkar_almasaa/
+    - assets/Images/athkar_alnawm/
+    - assets/Images/athkar_alistikaz/
+    - assets/Images/athkar_baad_alsalah/
