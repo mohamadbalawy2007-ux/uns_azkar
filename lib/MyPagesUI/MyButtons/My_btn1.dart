@@ -21,46 +21,46 @@ class My_btn1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          margin: EdgeInsets.only(top: 20, left: 15),
-          width: 185,
-          height: 175,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              width: 1.5,
-              color: const Color.fromARGB(255, 13, 109, 61),
-            ),
-          ),
-          child: Material(
-            color: const Color.fromARGB(255, 20, 78, 49),
-            borderRadius: BorderRadius.circular(16),
-            child: InkWell(
-              onTap: onClick,
-              borderRadius: BorderRadius.circular(16),
-              splashColor: Colors.white24,
-              highlightColor: Colors.white10,
-              child: Column(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: bgcolor,
-                      border: Border.all(
-                        width: 1.5,
-                        color: border_bgcolor,
-                      ),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    margin: EdgeInsets.only(right: 100, top: 15),
-                    child: Icon(icon, size: 30, color: color),
+    return Container(
+      margin: EdgeInsets.fromLTRB(7.5, 20, 7.5, 0),
+      height: 175,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          width: 1.5,
+          color: const Color.fromARGB(255, 13, 109, 61),
+        ),
+      ),
+      child: Material(
+        color: const Color.fromARGB(255, 20, 78, 49),
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          onTap: onClick,
+          borderRadius: BorderRadius.circular(16),
+          splashColor: Colors.white24,
+          highlightColor: Colors.white10,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: bgcolor,
+                    border: Border.all(width: 1.5, color: border_bgcolor),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 35, top: 2),
+                  margin: EdgeInsets.only(left: 15, top: 15),
+                  child: Icon(icon, size: 30, color: color),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  margin: EdgeInsets.only(right: 15, top: 8),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Text(
                       txt,
                       style: TextStyle(
@@ -70,8 +70,14 @@ class My_btn1 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 40, top: 10),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  margin: EdgeInsets.only(right: 15, top: 10),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Text(
                       txt2,
                       style: TextStyle(
@@ -81,12 +87,12 @@ class My_btn1 extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
