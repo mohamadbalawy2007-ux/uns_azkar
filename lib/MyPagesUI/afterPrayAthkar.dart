@@ -100,7 +100,7 @@ class _AfterPrayAthkarState extends State<AfterPrayAthkar> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "أذكار الاستيقاظ",
+            "أذكار بعد الصلاة",
             style: TextStyle(
               fontSize: 27,
               color: Colors.white,

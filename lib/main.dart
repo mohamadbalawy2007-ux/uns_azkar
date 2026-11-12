@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'MyPagesUI/HomePage.dart';
+
 import 'package:azkar_muslim/MyPagesUI/notification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeAthkarNotifications();
+  await scheduleTestNotification();
   runApp(const MyApp());
 }
 
@@ -16,7 +19,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();

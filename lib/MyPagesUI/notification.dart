@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -10,16 +9,13 @@ import 'package:azkar_muslim/MyPagesUI/EveningAthkar.dart';
 import 'package:azkar_muslim/MyPagesUI/wakeup_athkar.dart';
 import 'package:azkar_muslim/MyPagesUI/SleepingAthkar.dart';
 
-
 final GlobalKey<NavigatorState> notificationNavigatorKey =
     GlobalKey<NavigatorState>();
-
 
 final FlutterLocalNotificationsPlugin notificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 String? pendingNotificationPayload;
-
 
 const int morningHour = 6;
 const int morningMinute = 0;
@@ -32,7 +28,6 @@ const int wakeupMinute = 0;
 
 const int sleepingHour = 22;
 const int sleepingMinute = 0;
-
 
 void openAthkarPage(String? payload) {
   if (payload == null) return;
@@ -60,17 +55,13 @@ void openAthkarPage(String? payload) {
   if (page == null) return;
 
   notificationNavigatorKey.currentState?.push(
-    MaterialPageRoute(
-      builder: (context) => page!,
-    ),
+    MaterialPageRoute(builder: (context) => page!),
   );
 }
-
 
 void notificationTap(NotificationResponse response) {
   openAthkarPage(response.payload);
 }
-
 
 void openPendingNotificationPage() {
   if (pendingNotificationPayload == null) return;
@@ -81,68 +72,54 @@ void openPendingNotificationPage() {
   openAthkarPage(payload);
 }
 
-
 Future<void> initializeAthkarNotifications() async {
-
-
   tz.initializeTimeZones();
 
-  final timezoneInfo =
-      await FlutterTimezone.getLocalTimezone();
-
-  tz.setLocalLocation(
-    tz.getLocation(timezoneInfo.identifier),
-  );
-
+  try {
+    final timezoneInfo = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timezoneInfo.identifier));
+    debugPrint('timezone: ${timezoneInfo.identifier}');
+  } catch (e) {
+    debugPrint('timezone error: $e');
+  }
 
   const AndroidInitializationSettings androidSettings =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
+  const DarwinInitializationSettings iosSettings = DarwinInitializationSettings();
 
-  const DarwinInitializationSettings iosSettings =
-      DarwinInitializationSettings();
-
-  const InitializationSettings initializationSettings =
-      InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
     android: androidSettings,
     iOS: iosSettings,
   );
-
 
   await notificationsPlugin.initialize(
     initializationSettings,
     onDidReceiveNotificationResponse: notificationTap,
   );
 
-
   await notificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+        AndroidFlutterLocalNotificationsPlugin
+      >()
       ?.requestNotificationsPermission();
 
-
   await notificationsPlugin
       .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin>()
-      ?.requestPermissions(
-        alert: true,
-        badge: true,
-        sound: true,
-      );
+        IOSFlutterLocalNotificationsPlugin
+      >()
+      ?.requestPermissions(alert: true, badge: true, sound: true);
 
-
-  final launchDetails =
-      await notificationsPlugin.getNotificationAppLaunchDetails();
+  final launchDetails = await notificationsPlugin
+      .getNotificationAppLaunchDetails();
 
   if (launchDetails?.didNotificationLaunchApp ?? false) {
-    pendingNotificationPayload =
-        launchDetails?.notificationResponse?.payload;
+    pendingNotificationPayload = launchDetails?.notificationResponse?.payload;
   }
 
-
   await scheduleAllAthkarNotifications();
+  await printPendingNotifications();
 }
-
 
 Future<void> scheduleDailyNotification({
   required int id,
@@ -152,7 +129,6 @@ Future<void> scheduleDailyNotification({
   required int minute,
   required String payload,
 }) async {
-
   final now = tz.TZDateTime.now(tz.local);
 
   var scheduledDate = tz.TZDateTime(
@@ -164,16 +140,11 @@ Future<void> scheduleDailyNotification({
     minute,
   );
 
-
-  if (scheduledDate.isBefore(now) ||
-      scheduledDate.isAtSameMomentAs(now)) {
-    scheduledDate = scheduledDate.add(
-      const Duration(days: 1),
-    );
+  if (scheduledDate.isBefore(now) || scheduledDate.isAtSameMomentAs(now)) {
+    scheduledDate = scheduledDate.add(const Duration(days: 1));
   }
 
-  const NotificationDetails notificationDetails =
-      NotificationDetails(
+  const NotificationDetails notificationDetails = NotificationDetails(
     android: AndroidNotificationDetails(
       'athkar_channel',
       'تذكيرات الأذكار',
@@ -189,7 +160,6 @@ Future<void> scheduleDailyNotification({
     ),
   );
 
-
   await notificationsPlugin.cancel(id);
 
   await notificationsPlugin.zonedSchedule(
@@ -198,17 +168,15 @@ Future<void> scheduleDailyNotification({
     body,
     scheduledDate,
     notificationDetails,
-    androidScheduleMode:
-        AndroidScheduleMode.inexactAllowWhileIdle,
+    androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
     payload: payload,
     matchDateTimeComponents: DateTimeComponents.time,
   );
+
+  debugPrint('scheduled $id at $scheduledDate');
 }
 
-
 Future<void> scheduleAllAthkarNotifications() async {
-
-
   await scheduleDailyNotification(
     id: 1001,
     title: 'أذكار الصباح 🌅',
@@ -217,7 +185,6 @@ Future<void> scheduleAllAthkarNotifications() async {
     minute: morningMinute,
     payload: 'morning',
   );
-
 
   await scheduleDailyNotification(
     id: 1002,
@@ -228,7 +195,6 @@ Future<void> scheduleAllAthkarNotifications() async {
     payload: 'evening',
   );
 
-
   await scheduleDailyNotification(
     id: 1003,
     title: 'أذكار الاستيقاظ ☀️',
@@ -237,7 +203,6 @@ Future<void> scheduleAllAthkarNotifications() async {
     minute: wakeupMinute,
     payload: 'wakeup',
   );
-
 
   await scheduleDailyNotification(
     id: 1004,
@@ -249,6 +214,43 @@ Future<void> scheduleAllAthkarNotifications() async {
   );
 }
 
+Future<void> scheduleTestNotification() async {
+  final now = tz.TZDateTime.now(tz.local);
+
+  await notificationsPlugin.zonedSchedule(
+    9999,
+    'تجربة الإشعارات ✅',
+    'إذا وصلك هذا الإشعار فالإشعارات شغالة.',
+    now.add(const Duration(seconds: 20)),
+    const NotificationDetails(
+      android: AndroidNotificationDetails(
+        'athkar_channel',
+        'تذكيرات الأذكار',
+        channelDescription: 'تذكيرات يومية بأوقات الأذكار',
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+      ),
+      iOS: DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+      ),
+    ),
+    androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+    payload: 'morning',
+  );
+
+  debugPrint('test notification scheduled for ${now.add(const Duration(seconds: 20))}');
+}
+
+Future<void> printPendingNotifications() async {
+  final pending = await notificationsPlugin.pendingNotificationRequests();
+  debugPrint('pending notifications: ${pending.length}');
+  for (final p in pending) {
+    debugPrint('pending ${p.id} ${p.title}');
+  }
+}
 
 Future<void> cancelAllAthkarNotifications() async {
   await notificationsPlugin.cancelAll();
