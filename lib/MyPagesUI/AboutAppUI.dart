@@ -33,6 +33,7 @@ class AboutAppUI extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50),
                         image: DecorationImage(
                           image: AssetImage("assets/Images/icon app.png"),
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -58,61 +59,56 @@ class AboutAppUI extends StatelessWidget {
                     SizedBox(height: 20),
 
                     Container(
-                      width: 385,
-                      height: 120,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(left: 15),
+                          Expanded(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 15),
-                                  child: Text(
-                                    "تطبيق يساعدك على الوصول الى",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                Text(
+                                  "تطبيق يساعدك على الوصول الى",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 1),
-                                  child: Text(
-                                    "أذكار الصباح والمساء والنوم والاستيقاظ",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                SizedBox(height: 3),
+                                Text(
+                                  "أذكار الصباح والمساء والنوم والاستيقاظ",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(top: 1),
-                                  child: Text(
-                                    "وأذكار الصلاة والمسبحة الالكترونية",
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                SizedBox(height: 3),
+                                Text(
+                                  "وأذكار الصلاة والمسبحة الالكترونية",
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(left: 30, bottom: 10),
-                            child: Icon(
-                              Icons.menu_book_sharp,
-                              size: 60,
-                              color: Colors.greenAccent,
-                            ),
+                          SizedBox(width: 10),
+                          Icon(
+                            Icons.menu_book_sharp,
+                            size: 55,
+                            color: Colors.greenAccent,
                           ),
                         ],
                       ),
@@ -131,66 +127,62 @@ class AboutAppUI extends StatelessWidget {
                     SizedBox(height: 10),
 
                     Container(
-                      width: 385,
-                      height: 50,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
+                          Expanded(
                             child: Text(
                               "أذكار متنوعة",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 23,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.notifications,
-                              color: Colors.greenAccent,
-                              size: 35,
-                            ),
+                          SizedBox(width: 12),
+                          Icon(
+                            Icons.notifications,
+                            color: Colors.greenAccent,
+                            size: 32,
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 15),
                     Container(
-                      width: 385,
-                      height: 50,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
+                          Expanded(
                             child: Text(
                               "واجهة بسيطة وسهلة الاستخدام",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 23,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.touch_app,
-                              color: Colors.greenAccent,
-                              size: 35,
-                            ),
+                          SizedBox(width: 12),
+                          Icon(
+                            Icons.touch_app,
+                            color: Colors.greenAccent,
+                            size: 32,
                           ),
                         ],
                       ),
@@ -198,66 +190,62 @@ class AboutAppUI extends StatelessWidget {
                     SizedBox(height: 15),
 
                     Container(
-                      width: 385,
-                      height: 50,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
+                          Expanded(
                             child: Text(
-                              "امكانية اضافة الاذكار الى المفضلة ",
+                              "امكانية اضافة الاذكار الى المفضلة",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 23,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.greenAccent,
-                              size: 35,
-                            ),
+                          SizedBox(width: 12),
+                          Icon(
+                            Icons.favorite,
+                            color: Colors.greenAccent,
+                            size: 32,
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: 15),
                     Container(
-                      width: 385,
-                      height: 50,
+                      width: double.infinity,
+                      margin: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
+                          Expanded(
                             child: Text(
                               "مناسبة لجميع المسلمين",
+                              textAlign: TextAlign.right,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 23,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.only(right: 15),
-                            child: Icon(
-                              Icons.groups,
-                              color: Colors.greenAccent,
-                              size: 35,
-                            ),
+                          SizedBox(width: 12),
+                          Icon(
+                            Icons.groups,
+                            color: Colors.greenAccent,
+                            size: 32,
                           ),
                         ],
                       ),
@@ -266,12 +254,13 @@ class AboutAppUI extends StatelessWidget {
 
                     Container(
                       width: 240,
-                      height: 160,
+                      padding: EdgeInsets.symmetric(vertical: 15),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(120, 14, 114, 61),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Icons.favorite,
@@ -288,6 +277,7 @@ class AboutAppUI extends StatelessWidget {
                           ),
 
                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 6),
                             color: Colors.greenAccent,
                             width: 150,
                             height: 0.5,

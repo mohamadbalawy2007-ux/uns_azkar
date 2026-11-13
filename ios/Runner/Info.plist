@@ -12,7 +12,7 @@
         <string>ar</string>
     </array>
     <key>CFBundleDisplayName</key>
-    <string>Ons</string>
+    <string>Uns - Azkar App</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
